@@ -4,11 +4,13 @@
     url: '{{ fileValue }}'
     dest: "/tmp/{{fileValue.split('/')[-1]}}"
     mode: 0777
+    remote_src: yes
   when: filepresent
   
 - name: Print value of the file
   debug:
     msg: "{{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}"
+    remote_src: yes
   register: filecontent
   when: filepresent
   
