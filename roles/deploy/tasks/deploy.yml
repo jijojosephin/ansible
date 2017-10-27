@@ -15,13 +15,19 @@
 #  when: filepresent
 - name: Find out what the remote machine's mounts are
   slurp:
-    src: {{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}
+    src: "{{'/tmp/'+fileValue.split('/')[-1] }}
   register: mounts
+- name: Print value of the file
+  set_fact: filecontents = {{ lookup('file', mounts) }}
+  remote_src: yes
+  register: filecontent
+  when: filepresent  
 - name: Echo the content of the file
   command: echo "{{item}}"
   with_items:
-    - "{{ filecontent }}"
+    - "{{ filecontents }}"
   when: filepresent  
+
 # - name: Print value of the file
   # set_fact: filecontents = {{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}
   # remote_src: yes
