@@ -1,0 +1,10 @@
+-type=staging input command1
+-type=staging input command2
+-type=staging input command3
+-type=staging input command4
+-type=staging input command5
+-type=staging input command6
+-type=staging input command7
+-type=staging input command8
+-type=staging input command9
+-type=staging input command10
