@@ -2,7 +2,7 @@
 - name: download file from GIT reporsitory
   get_url:
     url: '{{ fileValue }}'
-    dest: "/tmp/+{{fileValue.split('/')[-1]}}"
+    dest: "/tmp/{{fileValue.split('/')[-1]}}"
     mode: 0777
     remote_src: yes
   when: filepresent
