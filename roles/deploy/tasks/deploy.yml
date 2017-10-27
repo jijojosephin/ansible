@@ -1,15 +1,26 @@
 ---
+- name: download file from GIT reporsitory
+  get_url:
+    url: '{{ fileValue }}'
+    dest: "/tmp/+{{fileValue.split('/')[-1]}}"
+    mode: 0777
+    remote_src: yes
+  when: filepresent
+  
 - name: Print value of the file
   debug:
-    msg: "{{ fileValue.split('\n') }}"
-  when: fileValue != ''
+    msg: "{{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}"
+  register: filecontent
+  when: filepresent
   
-- name: Output the content of the file
-  command: echo "{{ fileValue }}"
-  register: output_echo_vars
-  
-- name: Print value of the file
+- name: Echo the content of the file
   command: echo "{{item}}"
   with_items:
-    - "{{ fileValue.split('\n') }}"
-  when: fileValue != ''
+    - "{{ filecontent.msg.split('\n') }}"
+  when: filepresent
+
+- name: Remove the temparory file
+  file:
+    path: "/tmp/+{{fileValue.split('/')[-1]}}"
+	state: absent
+  when: filepresent
