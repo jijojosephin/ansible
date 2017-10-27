@@ -4,7 +4,7 @@
     url: '{{ fileValue }}'
     dest: "/tmp/{{fileValue.split('/')[-1]}}"
     mode: 0777
-    remote_src: yes
+    remote_src: no
   when: filepresent
   
 #- name: Print value of the file
