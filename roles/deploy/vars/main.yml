@@ -1,2 +1,2 @@
 ---
-fileValue: "{{ lookup('file', fileValue) if fileValue != '' else '' }}"
+filepresent: "{{ TRUE if fileValue != '' else FALSE }}"
