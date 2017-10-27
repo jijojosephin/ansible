@@ -14,7 +14,17 @@
     flat: yes
 
 - name: Print value of the file
-  debug:
-    msg: "{{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}"
-  register: filecontent
-  when: filepresent	
+  set_fact: filecontents = {{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}
+  when: filepresent
+
+- name: Print value of the file
+  command: echo "{{item}}"
+  with_items:
+    - "{{ filecontents.split('\n') }}"
+  when: filepresent
+  
+- name: Remove the temparory file
+  file:
+    path: "/tmp/+{{fileValue.split('/')[-1]}}"
+    state: absent
+  when: filepresent  
