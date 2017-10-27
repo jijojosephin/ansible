@@ -1,2 +1,2 @@
 ---
-filepresent: "{{ TRUE if fileValue != '' else FALSE }}"
+filepresent: "{{ true if fileValue != '' else false }}"
