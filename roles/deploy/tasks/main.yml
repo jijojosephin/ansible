@@ -1,0 +1,6 @@
+---
+- name: include var files
+  include_vars: "main.yml"
+
+- name: include deploy tasks
+  include: "deploy.yml"
