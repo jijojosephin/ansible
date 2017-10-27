@@ -22,5 +22,5 @@
 - name: Remove the temparory file
   file:
     path: "/tmp/+{{fileValue.split('/')[-1]}}"
-	state: absent
+    state: absent
   when: filepresent
