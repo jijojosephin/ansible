@@ -7,41 +7,16 @@
     remote_src: yes
   when: filepresent
   
-#- name: Print value of the file
-#  debug:
-#    msg: "{{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}"
-#  remote_src: yes
-#  register: filecontent
-#  when: filepresent
-- name: Find out what the remote machine's mounts are
-  slurp:
-    src: "{{'/tmp/'+fileValue.split('/')[-1] }}
-  register: mounts
+- name: Copy the file from remote to server
+  fetch:
+    src: /tmp/{{fileValue.split('/')[-1]}}
+    dest: /tmp/{{fileValue.split('/')[-1]}}
+    flat: yes
+
 - name: Print value of the file
-  set_fact: filecontents = {{ lookup('file', mounts) }}
-  remote_src: yes
+  debug:
+    msg: "{{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}"
   register: filecontent
-  when: filepresent  
-- name: Echo the content of the file
-  command: echo "{{item}}"
-  with_items:
-    - "{{ filecontents }}"
-  when: filepresent  
-
-# - name: Print value of the file
-  # set_fact: filecontents = {{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}
-  # remote_src: yes
-  # register: filecontent
-  # when: filepresent
-  
-# - name: Echo the content of the file
-  # command: echo "{{item}}"
-  # with_items:
-    # - "{{ filecontent.msg.split('\n') }}"
-  # when: filepresent
-
-- name: Remove the temparory file
-  file:
-    path: "/tmp/+{{fileValue.split('/')[-1]}}"
-    state: absent
   when: filepresent
+
+	
