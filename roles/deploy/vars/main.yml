@@ -1,2 +1,2 @@
 ---
-fileValue: {{ lookup('file', fileValue) if fileValue != '' else '' }}
+fileValue: "{{ lookup('file', fileValue) if fileValue != '' else '' }}"
