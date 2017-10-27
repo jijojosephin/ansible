@@ -9,14 +9,12 @@
 
 - name: Copy the file from remote to server
   fetch:
-    src: /tmp/{{fileValue.split('/')[-1]}}
-    dest: /tmp/{{fileValue.split('/')[-1]}}
+    src: "/tmp/{{fileValue.split('/')[-1]}}"
+    dest: "/tmp/{{fileValue.split('/')[-1]}}"
     flat: yes
 
 - name: Print value of the file
   debug:
     msg: "{{ lookup('file', '/tmp/'+fileValue.split('/')[-1]).split('\n') }}"
   register: filecontent
-  when: filepresent
-
-	
+  when: filepresent	
