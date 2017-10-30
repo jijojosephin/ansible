@@ -1,2 +1,3 @@
 ---
 filepresent: "{{ true if fileValue != '' else false }}"
+gitorlocal: "{{ true if len(fileValue.split('/')) > 1 else false }}"
