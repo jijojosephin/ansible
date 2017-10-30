@@ -5,19 +5,19 @@
     dest: "/tmp/{{fileValue.split('/')[-1]}}"
     mode: 0777
     remote_src: yes
-  when: filepresent
+  when: filepresent and gitorlocal
 
 - name: Copy the file from remote to server
   fetch:
     src: "/tmp/{{fileValue.split('/')[-1]}}"
     dest: "/tmp/{{fileValue.split('/')[-1]}}"
     flat: yes
-  when: filepresent
+  when: filepresent and gitorlocal
 
 - name: Read the contents of the file
   set_fact: 
     filecontents: "{{ lookup('file', '/tmp/'+fileValue.split('/')[-1]) }}"
-  when: filepresent
+  when: filepresent and gitorlocal
 
 - name: Print value of the file
   command: echo "{{item}}"
