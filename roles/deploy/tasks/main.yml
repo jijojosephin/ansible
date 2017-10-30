@@ -1,6 +1,5 @@
 ---
-- name: include var files
-  include_vars: "main.yml"
-
-- name: include deploy tasks
-  include: "deploy.yml"
+filepresent: "{{ true if fileValue != '' else false }}"
+gitorlocal: "{{ true if fileValue.split('/')|length > 1 else false }}"
+filelocation: "{{'/home/u40953/'+fileValue}}"
+filename: "{{ fileValue.split('/')[-1] if gitorlocal else fileValue }}"
