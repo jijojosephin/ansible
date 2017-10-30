@@ -1,4 +1,4 @@
 ---
 filepresent: "{{ true if fileValue != '' else false }}"
-gitorlocal: "{{ true if len(filepresent.split('/')) > 1 else false }}"
-filelocation: "{{'/home/u40953/'+filepresent}}"
+gitorlocal: "{{ true if len(fileValue.split('/')) > 1 else false }}"
+filelocation: "{{'/home/u40953/'+fileValue}}"
