@@ -22,7 +22,7 @@
 - name: Read the contents of the local file
   set_fact: 
     filecontents: "{{ lookup('file', filelocation }}"
-  when: filepresent and !gitorlocal
+  when: filepresent and not gitorlocal
   
 - name: Print value of the file
   command: echo "{{item}}"
