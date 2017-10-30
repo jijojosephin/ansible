@@ -22,7 +22,7 @@
 
 - name: Read the contents of the file
   set_fact: 
-    filecontents: "{{ lookup('file', '/tmp/'+filename }}"
+    filecontents: "{{ lookup('file', '/tmp/'+filename) }}"
   when: filepresent
 
 - name: Print value of the file
