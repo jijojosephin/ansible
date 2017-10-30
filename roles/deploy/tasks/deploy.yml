@@ -14,11 +14,16 @@
     flat: yes
   when: filepresent and gitorlocal
 
-- name: Read the contents of the file
+- name: Read the contents of the git file
   set_fact: 
     filecontents: "{{ lookup('file', '/tmp/'+fileValue.split('/')[-1]) }}"
   when: filepresent and gitorlocal
 
+- name: Read the contents of the local file
+  set_fact: 
+    filecontents: "{{ lookup('file', filelocation }}"
+  when: filepresent and !gitorlocal
+  
 - name: Print value of the file
   command: echo "{{item}}"
   with_items:
